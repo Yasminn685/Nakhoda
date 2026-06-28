@@ -1,12 +1,19 @@
-#Build WAR using MAVEN
+# Build WAR using MAVEN
 FROM maven:3.9.4-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
-#Deploy to Tomcat
+# Deploy to Tomcat
 FROM tomcat:9.0-jdk17
 RUN rm -rf /usr/local/tomcat/webapps/*
+
+# AMBIL DRIVER MYSQL DAN MASUKKAN KE DALAM TOMCAT LIB
+# Ini memastikan Tomcat mengenali Class com.mysql.cj.jdbc.Driver
+ADD https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar /usr/local/tomcat/lib/
+
+# Salin fail WAR projek anda
 COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
+
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
