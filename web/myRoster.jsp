@@ -16,11 +16,11 @@
     if (role == null) role = "operator";
 
     // Logik menentukan halaman dashboard berdasarkan role
-    String dashboardPage = "operatorDashboard.jsp";
+    String dashboardPage = "operatorDashboard";
     if ("manager".equalsIgnoreCase(role)) {
-        dashboardPage = "managerDashboard.jsp";
+        dashboardPage = "managerDashboard";
     } else if ("supervisor".equalsIgnoreCase(role)) {
-        dashboardPage = "supervisorDashboard.jsp";
+        dashboardPage = "supervisorDashboard";
     }
 %>
 
