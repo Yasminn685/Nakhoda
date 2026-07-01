@@ -13,6 +13,14 @@
     if (role == null) role = "operator";
 
     java.time.LocalDate today = java.time.LocalDate.now();
+
+    // Logik menentukan halaman dashboard berdasarkan role
+    String dashboardPage = "operatorDashboard";
+    if ("manager".equalsIgnoreCase(role)) {
+        dashboardPage = "managerDashboard";
+    } else if ("supervisor".equalsIgnoreCase(role)) {
+        dashboardPage = "supervisorDashboard";
+    }
 %>
 
 <!DOCTYPE html>
@@ -186,7 +194,12 @@
 
         <div class="topbar">
             <div style="font-weight:900;">My Tasks</div>
-            <div><%=name%></div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div><%=name%></div>
+                <a href="<%= dashboardPage %>" style="color: white; text-decoration: none; font-weight: bold;">
+                    ⬅ Back
+                </a>
+            </div>
         </div>
 
         <section class="card">
@@ -205,8 +218,7 @@
                 <tbody>
 
                 <%
-                    List<Task> taskList =
-                        (List<Task>) request.getAttribute("taskList");
+                    List<Task> taskList = (List<Task>) request.getAttribute("taskList");
 
                     if(taskList != null){
                         for(Task t : taskList){
@@ -271,7 +283,6 @@
     </main>
 </div>
 
-<!-- MODAL -->
 <div id="taskModal" class="modal">
 
     <div class="modal-content">
