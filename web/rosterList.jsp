@@ -18,11 +18,11 @@
     List<Roster> roster = (List<Roster>) request.getAttribute("roster");
 
     // Logik menentukan halaman dashboard berdasarkan role
-    String dashboardPage = "managerDashboard.jsp";
+    String dashboardPage = "managerDashboard";
     if ("supervisor".equalsIgnoreCase(role)) {
-        dashboardPage = "supervisorDashboard.jsp";
+        dashboardPage = "supervisorDashboard";
     } else if ("operator".equalsIgnoreCase(role)) {
-        dashboardPage = "operatorDashboard.jsp";
+        dashboardPage = "operatorDashboard";
     }
 %>
 
