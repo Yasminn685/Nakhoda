@@ -20,11 +20,11 @@
         role = "manager"; // Default jika tiada session
     }
 
-    String dashboardPage = "managerDashboard.jsp";
+    String dashboardPage = "managerDashboard";
     if ("supervisor".equalsIgnoreCase(role)) {
-        dashboardPage = "supervisorDashboard.jsp";
+        dashboardPage = "supervisorDashboard";
     } else if ("operator".equalsIgnoreCase(role)) {
-        dashboardPage = "operatorDashboard.jsp";
+        dashboardPage = "operatorDashboard";
     }
 %>
 
