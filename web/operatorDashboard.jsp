@@ -13,7 +13,7 @@
 <html>
 <head>
     <title>Operator Dashboard | NAKHODA</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/dashboard.css">
     <script src="assets/js/dashboard.js"></script>
 
@@ -120,6 +120,32 @@
         .fc-event.active{ background:#1e88e5 !important; }
         .fc-event.overdue{ background:#dc3545 !important; }
         .fc-event.upcoming{ background:#6c757d !important; }
+
+        /* ==========================================================================
+   KOD TAMBAHAN: RESPONSIF UNTUK TELEFON (Maksimum 768px)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    .layout {
+        flex-direction: column !important;
+    }
+    .grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    .two-col {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    .card {
+        overflow-x: auto !important;
+    }
+    .form-card {
+        overflow-x: visible !important;
+    }
+    .modern-form {
+        grid-template-columns: 1fr !important;
+    }
+}
 
     </style>
 </head>
