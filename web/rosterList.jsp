@@ -15,8 +15,15 @@
         role = "manager";
     }
 
-    List<Roster> roster =
-   (List<Roster>) request.getAttribute("roster");
+    List<Roster> roster = (List<Roster>) request.getAttribute("roster");
+
+    // Logik menentukan halaman dashboard berdasarkan role
+    String dashboardPage = "managerDashboard.jsp";
+    if ("supervisor".equalsIgnoreCase(role)) {
+        dashboardPage = "supervisorDashboard.jsp";
+    } else if ("operator".equalsIgnoreCase(role)) {
+        dashboardPage = "operatorDashboard.jsp";
+    }
 %>
 
 <!DOCTYPE html>
@@ -58,22 +65,18 @@
 
 <div class="layout">
 
-    <!-- Sidebar -->
     <%@ include file="includes/sidebar.jsp" %>
 
-    <!-- Main Content -->
     <main class="content">
 
-        <!-- Top Bar -->
-        <div class="topbar">
+        <div class="topbar" style="display: flex; justify-content: space-between; align-items: center;">
 
             <div style="font-weight:900;">
                 Manage Roster
             </div>
 
-            <div class="actions">
+            <div class="actions" style="display: flex; gap: 10px; align-items: center;">
 
-                <!-- SUPERVISOR ONLY -->
                 <% if ("supervisor".equalsIgnoreCase(role)) { %>
 
                     <button class="btn"
@@ -82,12 +85,15 @@
                     </button>
 
                 <% } %>
+                
+                <a href="<%= dashboardPage %>" style="color: inherit; text-decoration: none; font-weight: bold; padding: 10px 15px;">
+                    ⬅ Back
+                </a>
 
             </div>
 
         </div>
 
-        <!-- Card -->
         <section class="card">
 
             <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -153,7 +159,7 @@
                     %>
 
                         <tr>
-                            <td colspan="9">
+                            <td colspan="9" style="text-align: center;">
                                 No roster found.
                             </td>
                         </tr>
@@ -168,10 +174,8 @@
 
                             <td><%= r.getRosterID() %></td>
 
-                            <!-- Jika belum join table users -->
                             <td><%= r.getUserID() %></td>
 
-                            <!-- Jika belum join table task -->
                             <td><%= r.getTaskID() %></td>
 
                             <td><%= r.getShiftName() %></td>
@@ -217,7 +221,7 @@
 
             </div>
 
-            <div class="footer-note">
+            <div class="footer-note" style="margin-top: 15px;">
 
                 Logged in as
                 <b><%= name %></b>
