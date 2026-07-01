@@ -13,6 +13,14 @@
     List<Task> tasks = taskDAO.getAllTask();
 
     String err = request.getParameter("err");
+    String role = (String) session.getAttribute("role);
+
+    String dashboardPage = "managerDashboard.jsp";
+    if("supervisor".equalsIgnoreCase(role)) {
+        dashboardPage = "supervisorDashboard.jsp";
+    } else if ("operator".equalsIgnoreCase(role)){
+        dashboardPage = "operatorDashboard.jsp";
+    }
 %>
 
 <!DOCTYPE html>
@@ -23,6 +31,33 @@
 
         <!-- ONLY ADD SHIFT CARD STYLE (NO TOUCH ORIGINAL STYLE) -->
         <style>
+            body {
+                margin: 0;
+                font-family: 'Segoe UI', sans-serif;
+                background: #f4f7fb;
+            }
+
+            .layout {
+                display: flex;
+                min-height: 100vh;
+            }
+
+            .content {
+                flex: 1;
+                padding: 20px;
+            }
+
+            /* TOPBAR */
+            .header-nav {
+                background: linear-gradient(135deg, #0b2a4a, #1e88e5);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 12px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+            }
             .shift-grid{
                 display:grid;
                 grid-template-columns:repeat(3,1fr);
@@ -65,12 +100,13 @@
 
             <%@ include file="includes/sidebar.jsp" %>
 
-            <main class="content">
+            <div class="content">
 
-                <div class="topbar">
-                    <div style="font-weight:900;">
-                        Create New Roster
+                <div class="header-nav">
+                    <div><b>NAKHODA</b>-Manage Roster
                     </div>
+
+                <a href="<%=dashboardPage%>"style="color:white;text-decoration:none;">⬅ Back</a>
                 </div>
 
                 <section class="card">
