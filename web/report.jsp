@@ -32,6 +32,14 @@
     }
     if (equipMap == null)
         equipMap = new java.util.LinkedHashMap<>();
+
+    // Logik menentukan halaman dashboard berdasarkan role
+    String dashboardPage = "managerDashboard";
+    if ("supervisor".equalsIgnoreCase(role)) {
+        dashboardPage = "supervisorDashboard";
+    } else if ("operator".equalsIgnoreCase(role)) {
+        dashboardPage = "operatorDashboard";
+    }
 %>
 
 <!DOCTYPE html>
@@ -141,19 +149,20 @@
 
         <div class="layout">
 
-            <!-- SIDEBAR -->
             <jsp:include page="includes/sidebar.jsp" />
 
-            <!-- CONTENT -->
             <div class="content">
 
-                <!-- TOPBAR -->
                 <div class="header-nav">
                     <div style="font-weight:800;">📊 Report Dashboard</div>
-                    <div>Welcome, <b><%=name%></b></div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div>Welcome, <b><%=name%></b></div>
+                        <a href="<%= dashboardPage %>" style="color:white; text-decoration:none; font-weight: bold;">
+                            ⬅ Back
+                        </a>
+                    </div>
                 </div>
 
-                <!-- KPI -->
                 <div class="grid">
 
                     <div class="card">
@@ -183,7 +192,6 @@
 
                 </div>
 
-                <!-- CHARTS -->
                 <div class="charts">
 
                     <div class="chart-card">
