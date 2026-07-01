@@ -29,6 +29,8 @@ if (role == null || !role.equalsIgnoreCase("manager")) {
 
 <head>
   <title>Manager Dashboard | NAKHODA</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="assets/css/dashboard.css">
   <script src="assets/js/dashboard.js"></script>
@@ -262,6 +264,42 @@ if (role == null || !role.equalsIgnoreCase("manager")) {
     border-radius: 10px;
     cursor: pointer;
 }
+
+/* ==========================================================================
+     KOD TAMBAHAN: RESPONSIF UNTUK TELEFON (Maksimum 768px)
+     ========================================================================== */
+  @media screen and (max-width: 768px) {
+      /* Paksa susunan layout utama bertukar dari mendatar ke menegak */
+      .layout {
+          flex-direction: column !important;
+      }
+
+      /* Tukar 4 kotak KPI daripada berbaris melintang kepada turun ke bawah */
+      .grid {
+          grid-template-columns: 1fr !important; /* Setiap kad ambil 1 baris penuh */
+          gap: 12px !important;
+      }
+
+      /* Tukar jadual & borang supaya turun ke bawah, bukan duduk sebelah-menyebelah */
+      .two-col {
+          grid-template-columns: 1fr !important; /* Isi kandungan memanjang ke bawah */
+          gap: 15px !important;
+      }
+
+      /* Sediakan skrol mendatar khas untuk jadual supaya skrin web tak pecah */
+      .card {
+          overflow-x: auto !important; /* Kalau jadual lebar sangat, user boleh skrol kanan-kiri dalam kotak tu */
+      }
+      
+      .form-card {
+          overflow-x: visible !important;
+      }
+
+      /* Jadikan borang input bertukar daripada 2 kolum kepada 1 kolum penuh */
+      .modern-form {
+          grid-template-columns: 1fr !important;
+      }
+  }
 
   </style>
 </head>
