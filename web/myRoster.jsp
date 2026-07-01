@@ -14,6 +14,14 @@
 
     if (name == null) name = "Operator";
     if (role == null) role = "operator";
+
+    // Logik menentukan halaman dashboard berdasarkan role
+    String dashboardPage = "operatorDashboard.jsp";
+    if ("manager".equalsIgnoreCase(role)) {
+        dashboardPage = "managerDashboard.jsp";
+    } else if ("supervisor".equalsIgnoreCase(role)) {
+        dashboardPage = "supervisorDashboard.jsp";
+    }
 %>
 
 <!DOCTYPE html>
@@ -152,26 +160,27 @@
 
 <div class="layout">
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
         <%@ include file="includes/sidebar.jsp" %>
     </aside>
 
-    <!-- CONTENT -->
     <main class="content">
 
-        <!-- TOPBAR -->
         <div class="topbar">
             <div style="font-weight:900;">
                 My Roster
             </div>
 
-            <div class="badge">
-                <%=name.substring(0,1).toUpperCase()%>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="badge">
+                    <%=name.substring(0,1).toUpperCase()%>
+                </div>
+                <a href="<%= dashboardPage %>" style="color: white; text-decoration: none; font-weight: bold;">
+                    ⬅ Back
+                </a>
             </div>
         </div>
 
-        <!-- CARD -->
         <div class="card">
 
             <h3 style="margin-top:0;">Assigned Rosters</h3>
@@ -244,7 +253,6 @@
     </main>
 </div>
 
-<!-- MODAL -->
 <div id="rosterModal" class="modal">
 
     <div class="modal-content">
